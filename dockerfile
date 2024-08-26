@@ -1,6 +1,7 @@
 FROM nginx
 RUN apt-get update
 RUN apt-get install git gcc g++ make automake curl wget autoconf libtool libpcre3-dev libxml2 -y
+RUN git clone https://github.com/carlosdg/owasp-modsecurity-crs.git conf/modsec/owasp_crs
 RUN git clone https://github.com/SpiderLabs/ModSecurity && \
 	cd ModSecurity && \
 	git submodule init && \

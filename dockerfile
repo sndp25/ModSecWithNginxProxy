@@ -21,6 +21,6 @@ RUN original_config=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p') \
 RUN rm -rf /etc/nginx/nginx.conf /etc/nginx/conf.d
 COPY conf /etc/nginx/
 
-WORDDIR /etc/nginx/
+WORKDIR /etc/nginx/
 EXPOSE 80
 CMD ["nginx","-g","daemon off;"]

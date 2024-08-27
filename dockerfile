@@ -1,7 +1,6 @@
 FROM nginx
 RUN apt-get update
 RUN apt-get install git gcc g++ make automake curl wget autoconf libtool libpcre3-dev libxml2 -y
-RUN git clone https://github.com/carlosdg/owasp-modsecurity-crs.git conf/modsec/owasp_crs
 RUN git clone https://github.com/SpiderLabs/ModSecurity && \
 	cd ModSecurity && \
 	git submodule init && \
@@ -20,7 +19,7 @@ RUN original_config=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p') \
 	cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
 RUN rm -rf /etc/nginx/nginx.conf /etc/nginx/conf.d
 COPY conf /etc/nginx/
-
+RUN git clone https://github.com/carlosdg/owasp-modsecurity-crs.git etc/nginx/modsec/owasp_crs
 WORKDIR /etc/nginx/
 EXPOSE 80
 CMD ["nginx","-g","daemon off;"]
